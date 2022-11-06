@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useContext } from "react";
 import Layout from "../../components/Layout";
 import data from "../../utils/data";
@@ -8,7 +8,7 @@ import { Store } from "../../utils/Store";
 
 export default function ProductScreen() {
   const { state, dispatch } = useContext(Store);
-
+  const router = useRouter();
   const { query } = useRouter();
   const { slug } = query;
   const product = data.products.find((x) => x.slug === slug);
@@ -26,6 +26,7 @@ export default function ProductScreen() {
     }
 
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
+    router.push("/cart");
   };
 
   return (
@@ -66,7 +67,7 @@ export default function ProductScreen() {
           <div className='mb-2 flex justify-between'>
             <div>Status</div>
             <div>
-              <div>{product.countinStock > 0 ? "In Stock" : "Unavailable"}</div>
+              <div>{product.countInStock > 0 ? "In Stock" : "Unavailable"}</div>
             </div>
           </div>
           <button className='primary-button w-full' onClick={addToCartHandler}>

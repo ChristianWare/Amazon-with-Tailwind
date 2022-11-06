@@ -25,7 +25,7 @@ export default function Layout({ children, title }) {
                 <a className='p-2'>
                   Cart
                   {cart.cartItems.length > 0 && (
-                    <span className='ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white'>
+                    <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                     </span>
                   )}
