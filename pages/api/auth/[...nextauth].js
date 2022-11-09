@@ -1,0 +1,46 @@
+import bcryptjs from "bcryptjs";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import User from "../../../models/User";
+import db from "../../../utils/db";
+
+export default NextAuth({
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user?._id) token._id = user._id; //"token" comes from NextAuth lifecycle, "user._id" comes from the database. We're filling the token with data from the database.
+      if (user?.isAdmin) token.isAdmin = user.isAdmin;
+      return token;
+    },
+    async session({ session, token }) {
+      if (token?._id) session.user._id = token._id;
+      if (token?.isAdmin) session.user.isAdmin = token.isAdmin;
+      return session;
+    },
+  },
+  //we are authenticating users based on the MDB, not google, github, etc.
+  providers: [
+    CredentialsProvider({
+      async authorize(credentials) {
+        await db.connect();
+        const user = await User.findOne({
+          email: credentials.email,
+        });
+        await db.disconnect();
+        if (user && bcryptjs.compareSync(credentials.password, user.password)) {
+          return {
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            image: "f",
+            isAdmin: user.isAdmin,
+          };
+        }
+        // this will throw an error message to the front end:
+        throw new Error('Invalid Email or Password')
+      },
+    }),
+  ],
+});
