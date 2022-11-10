@@ -151,7 +151,7 @@ export default function LoginScreen() {
             {...register("email", {
               required: "Please enter email",
               pattern: {
-                value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
+                value: /^[A-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
                 message: "Please enter valid email",
               },
             })}
