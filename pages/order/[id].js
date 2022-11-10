@@ -534,7 +534,7 @@ function OrderScreen() {
                     {loadingPay && <div>Loading...</div>}
                   </li>
                 )}
-                {session.user.isAdmin && order.isPaid && !order.isDelivered && (
+                {/* {session.user.isAdmin && order.isPaid && !order.isDelivered && (
                   <li>
                     {loadingDeliver && <div>Loading...</div>}
                     <button
@@ -544,7 +544,7 @@ function OrderScreen() {
                       Deliver Order
                     </button>
                   </li>
-                )}
+                )} */}
               </ul>
             </div>
           </div>
