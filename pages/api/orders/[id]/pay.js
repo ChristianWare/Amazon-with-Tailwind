@@ -9,7 +9,7 @@ const handler = async (req, res) => {
   }
 
   await db.connect();
-  const order = await Order.findById(req, query.id);
+  const order = await Order.findById(req.query.id);
   if (order) {
     if (order.isPaid) {
       return res.status(400).send({ message: "Error: order is already paid" });
