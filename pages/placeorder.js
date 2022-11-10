@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Store } from "../utils/Store";
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
@@ -28,7 +28,7 @@ export default function PlaceOrderScreen() {
   const router = useRouter();
   useEffect(() => {
     if (!paymentMethod) {
-      Router.push("/payment");
+      router.push("/payment");
     }
   }, [paymentMethod, router]);
 
