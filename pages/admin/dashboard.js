@@ -126,21 +126,21 @@ function AdminDashboardScreen() {
                   <div className='card m-5 p-5'>
                     <p className='text-3xl'>{summary.productsCount}</p>
                     <p>Products</p>
-                    <Link href='/admin/orders'>View Products</Link>
+                    <Link href='/admin/products'>View Products</Link>
                   </div>
                   <div className='card m-5 p-5'>
                     <p className='text-3xl'>{summary.usersCount}</p>
                     <p>Users</p>
-                    <Link href='/admin/orders'>View Users</Link>
+                    <Link href='/admin/users'>View Users</Link>
                   </div>
                 </div>
                 <h2 className="text-xl">Sales Report</h2>
-                <Bar 
+                {/* <Bar 
                 options={{
                   legend: { display: true, position: 'right' }
                 }}
                 data={data}
-                 />
+                 /> */}
               </div>
             )}
           </div>
