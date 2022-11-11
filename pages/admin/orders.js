@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Layout from "../../components/Layout";
 import Link from "next/link";
-import { useContext, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { getError } from "../../utils/error";
 
 function reducer(state, action) {
@@ -20,7 +20,7 @@ function reducer(state, action) {
 export default function AdminOrderScreen() {
   const [{ loading, error, orders }, dispatch] = useReducer(reducer, {
     loading: true,
-    summary: { salesData: [] },
+    orders: [],
     error: "",
   });
 
@@ -99,7 +99,7 @@ export default function AdminOrderScreen() {
                           : "not paid"}
                       </td>
                       <td className='p-5'>
-                        {order.isDelievered
+                        {order.isDelivered
                           ? `${order.deliveredAt.substring(0, 10)}`
                           : "not delivered"}
                       </td>
